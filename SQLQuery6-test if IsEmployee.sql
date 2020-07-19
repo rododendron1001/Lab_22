@@ -1,3 +1,4 @@
+----- varianta I
 select *
 from
 (
@@ -21,12 +22,16 @@ on e.EmployeeId=p.PersonId
 order by LastName, FirstName, DateofBirth
 ;
 
-==================== TEST
-select  ltrim(p.LastName) LastName, ltrim(p.FirstName) FirstName, FORMAT(p.DateOfBirth, 'dd/MM/yyyy ') DateOfBirth, e.CompanyId CompanyId, ISNULL(e.CompanyId,0) IsEmployee
+----- varianta II
+set ANSI_NULLS off;
+select a.LastName, a.FirstName, a.DateOfBirth, case a.CompanyId when NULL then 0 else 1 end  IsEmployee
+from
+(
+select  ltrim(p.LastName) LastName, ltrim(p.FirstName) FirstName, FORMAT(p.DateOfBirth, 'dd/MM/yyyy ') DateOfBirth, e.CompanyId CompanyId
 from Employee e
 right join Person p
 on e.EmployeeId=p.PersonId
-order by LastName, FirstName, DateofBirth
+) a
 ;
 
 
