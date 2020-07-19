@@ -12,7 +12,7 @@ on e.EmployeeId=p.PersonId
 where e.CompanyId is null
 ) a
 ) aa
-union
+union all
 (
 select  ltrim(p.LastName) LastName, ltrim(p.FirstName) FirstName, p.DateOfBirth DateOfBirth, 1 IsEmployee
 from Employee e
